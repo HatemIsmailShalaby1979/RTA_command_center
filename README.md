@@ -43,4 +43,5 @@ streamlit run srcapp.py
 ---
 **Author:** Hatem Shalaby — Operations Architect & Automation Engineer  
 [LinkedIn](https://linkedin.com/in/hatem-shalaby-7359611a2) · 
-[Portfolio](https://hatemismail2011shalaby.github.io/RTA-Operations-Portfolio/)
+[Portfolio](https://hatemismail2011shalaby.github.io/RTA-Operations-Portfolio/) · 
+[Email](mailto:hatemismail2011@gmail.com)
