@@ -1,47 +1,132 @@
-# RTA Command Center — Real-Time Adherence Dashboard
+# RTA Command Center
 
-> Production-grade real-time adherence monitoring system for contact center 
-> and BPO operations. Eliminates the 15–30 minute lag between adherence 
-> breaches and corrective action.
+> **Status: building attempt.** The adherence-variance engine and threshold logic
+> run against the sample data included in the repository. The business-impact
+> figures in this file have no recorded method, baseline, or sample, so they are
+> presented below as historical project context, not as measured results. Snapshot
+> 2026-06-02.
 
-## Business Impact
+One of the four building attempts from May–June 2026 — the period when I left a
+twenty-eight-year operations career and started building full time, alone, while
+teaching myself to write software. The thinking here was later absorbed into
+Helix Prime.
 
-| Metric | Before | After | Delta |
-|---|---|---|---|
-| Team Daily Throughput (TPD) | 14 tasks | 40 tasks | ↑ 186% |
-| Quality Score (QA) | Variable | 100% maintained | Zero regression |
-| DSAT incidents | Baseline | 0 | Eliminated |
-| Manual reporting hours | ~8 hrs/week | 0 | ↓ 100% |
+## What it does
 
-## What It Does
-- Live adherence variance tracking per agent and queue
-- Auto-alert thresholds — configurable per SLA tier
-- Anomaly detection layer preventing escalation compounding
-- CRM data simulation for demo and staging environments
+Real-time adherence monitoring for contact-centre and BPO operations. It tracks
+adherence variance per agent and per queue, applies configurable alert thresholds,
+and exports compliance and adherence reports. The problem it targets is the lag
+between an adherence breach and the corrective action.
+
+- Adherence variance tracking per agent and queue
+- Configurable alert thresholds per SLA tier
+- Anomaly-detection layer for compounding escalations
+- CRM data simulation for demo and staging
 - Exportable compliance and adherence reports
 
-## Tech Stack
-`Python` · `Streamlit` · `Pandas` · `SQL` · `Docker`
+## What is verified, and what is not
 
-## Quick Start
-```bash
-git clone https://github.com/ThommyShelby79/RTA-COMMAND-CENTER---FULL-BUILD.git
-cd RTA-COMMAND-CENTER---FULL-BUILD
-pip install -r requirements.txt
-streamlit run srcapp.py
-```
+| Item | Status |
+|---|---|
+| Adherence variance and threshold logic | Runs locally against the sample data. |
+| CRM data simulation | Runs for demo and staging use. |
+| Report export | Runs locally. |
+| Throughput, QA, DSAT, and reporting-time figures | Historical project context. No method, baseline, or sample is recorded. Not verifiable. |
+| External audit | None. |
+
+### Historical project context (unverified)
+
+An earlier version of this file presented the figures below as measured business
+impact. No baseline, sample, or method was ever recorded for any of them, so they
+are reproduced here as the project's own historical claims and marked unverified.
+They should not be read as results.
+
+| Claim | Figure | Status |
+|---|---|---|
+| Team daily throughput | 14 tasks → 40 tasks (↑ 186%) | Unverified historical claim |
+| Quality score | 100% maintained | Unverified historical claim |
+| DSAT incidents | 0 | Unverified historical claim |
+| Manual reporting time | ~8 hrs/week → 0 | Unverified historical claim |
+
+The "Production-ready" label that previously appeared in this file has been
+removed. It was not supported: no production gates are recorded for this
+repository.
+
+## Quick start
+
+    git clone https://github.com/HatemIsmailShalaby1979/RTA_command_center.git
+    cd RTA_command_center
+    pip install -r requirements.txt
+    streamlit run srcapp.py
 
 ## Architecture
-- `srcapp.py` — Streamlit UI layer and session state management  
-- `calculations.py` — Adherence variance engine and threshold logic  
-- `visualizations.py` — Chart rendering and alert display components  
-- `.devcontainer/` — Containerized dev environment (Docker-ready)
 
-## Status
-`Production-ready` · `Containerized` · `Multi-tenant capable`
+- `srcapp.py`: Streamlit UI layer and session state management
+- `calculations.py`: adherence variance engine and threshold logic
+- `visualizations.py`: chart rendering and alert display
+- `.devcontainer/`: containerised development environment
 
----
-**Author:** Hatem Shalaby — Operations Architect & Automation Engineer  
-[LinkedIn](https://linkedin.com/in/hatem-shalaby-7359611a2) · 
-[Portfolio](https://hatemismail2011shalaby.github.io/RTA-Operations-Portfolio/) · 
-[Email](mailto:hatemismail2011@gmail.com)
+## Stack
+
+Python · Streamlit · Pandas · SQL · Docker
+
+## Honest boundary
+
+It is a single application, not a deployed service. It does not integrate with a
+live workforce-management or telephony system; the CRM layer is simulated. It has
+no authentication, no role separation, and no tenant isolation. The adherence data
+is sample data, not production data.
+
+This is not a production deployment claim. There is no external audit, no
+certified data isolation, and no signed security review. No revenue has been
+realised.
+
+## The founder's story
+
+I spent twenty-eight years in contact-centre operations and workforce management.
+Forecasting, scheduling, adherence, service levels, churn. The same problems
+appeared in every company I worked in, and none of the tools solved them properly.
+
+In April 2026 I left that career and started building full time — alone, and
+teaching myself to write software as I went. The first four tools were published
+six weeks later, in May and June 2026. Each one took a single operational problem
+and solved it properly. They were not impressive. They were correct.
+
+Those four tools converged into one idea: **Helix Codex**, an accountable AI
+operating organization. Not an autonomous agent. An organization with a
+constitution, named roles with bounded authority, evidence trails, and a human at
+every consequential boundary. Helix Prime is its operations core.
+
+RTA Command Center is one of the four building attempts. It is maintained by one
+person, with no team and no funding. It has not been externally audited and it has
+not made revenue. Where it is unfinished, this document says so.
+
+## Related work
+
+- [Helix Prime](https://github.com/HatemIsmailShalaby1979/Helix-Prime) — the operations core
+- [Helix Education](https://github.com/HatemIsmailShalaby1979/Helix-Education) — event-sourced learning engine
+- [Study Studio](https://github.com/HatemIsmailShalaby1979/Study-Studio) — local-first AI tutor
+- [L&D Command Center](https://github.com/HatemIsmailShalaby1979/L-D-Command-Center) — desktop learning and career workstation
+- [Blue Waves](https://github.com/HatemIsmailShalaby1979/Blue-Waves-) — content studio
+- [LIVE Support Assistant](https://github.com/HatemIsmailShalaby1979/LIVE-Support-Assistant) — explainable support prototype
+- [Full portfolio](https://github.com/HatemIsmailShalaby1979) — the front door
+
+### The 2026 building attempts
+
+- [WFM Forecasting Calculator](https://github.com/HatemIsmailShalaby1979/wfm-forecasting-calculator)
+- [CX Sentiment Sentinel](https://github.com/HatemIsmailShalaby1979/cx-sentiment-sentinel)
+- [Dynamic Ops Automation Engine](https://github.com/HatemIsmailShalaby1979/Dynamic-Ops-Automation-Engine)
+
+## Author
+
+**Hatem Ismail Shalaby** — Operations Architect · AI Systems Engineer · Founder
+
+- GitHub: [HatemIsmailShalaby1979](https://github.com/HatemIsmailShalaby1979)
+- LinkedIn: [hatem-shalaby-202902127](https://www.linkedin.com/in/hatem-shalaby-202902127/)
+- Email: hatemshalaby2025@gmail.com
+
+Based in Al Obour City, Al-Qalyubia Governorate, Egypt.
+
+## Licence
+
+MIT
