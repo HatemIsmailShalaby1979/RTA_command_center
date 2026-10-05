@@ -7,9 +7,9 @@
 
 ![licence](https://img.shields.io/badge/licence-MIT-blue)
 [![last commit](https://img.shields.io/github/last-commit/HatemIsmailShalaby1979/RTA_command_center)](https://github.com/HatemIsmailShalaby1979/RTA_command_center/commits/main)
-![status](https://img.shields.io/badge/ci-no CI-lightgrey?label=no CI%20(2026-10-02))
+![status](https://img.shields.io/badge/ci-no CI-lightgrey?label=no CI%20(2026-10-05))
 
-*Measured 2026-10-06 — head `15f7742` (2026-10-02); Python.*
+*Measured 2026-10-06 — head `08b84c0` (2026-10-05); Python.*
 
 <!-- No static test or coverage count is shown here: a frozen
      number decays silently. Run the suite for a current figure;
