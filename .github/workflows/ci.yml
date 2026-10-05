@@ -1,0 +1,81 @@
+# CI for the RTA command centre. Read this before extending it.
+#
+# WHAT IS CHECKED, AND WHY NOT MORE
+# ---------------------------------
+# A syntax and undefined-name gate over the shipped code: src/ and the root
+# visualizations.py. That is a real gate and it is verified to fail on an
+# injected undefined name.
+#
+# `_archive/` is deliberately outside the gate. It holds one file,
+# calculations_root_stub.py, which nothing imports and which cannot work: its
+# calculate_adherence body is a placeholder comment that returns `df_result`, a
+# name that is never assigned, and it imports `core`, a module that does not
+# exist in this repository. Gating it would mean the workflow is red from its
+# first run over code that ships nothing.
+#
+# Two things a reader should know about this repository's state:
+#
+#   - requirements.txt pins only streamlit, but src/calculations.py imports numpy
+#     and pandas and visualizations.py imports plotly. The workflow installs
+#     those explicitly for that reason rather than editing requirements.txt,
+#     which is a separate call about what the project declares as its
+#     dependencies.
+#   - src/app.py imports `calculations` and `visualizations` as bare module names,
+#     so src/ must be on the path for the app to import at all. The import check
+#     below sets PYTHONPATH=src accordingly.
+#
+# There is no test suite in this repository and none is claimed. Adding a pytest
+# step before tests exist would produce a green tick that means nothing.
+#
+# WHAT TO DO WHEN TESTS ARRIVE
+# ----------------------------
+# Add a pytest step. Keep the lint gate regardless: it is the one that works
+# today, and a test suite does not catch a syntax error in a file no test
+# imports.
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: python -m pip install --upgrade pip ruff
+
+      - name: Syntax and undefined-name gate
+        # Scoped to shipped code. _archive/ is excluded on purpose; see the
+        # header. E9 syntax, F63 comparison, F7 syntax-ish, F82/F821 undefined.
+        run: |
+          ruff check --select=E9,F63,F7,F82,F821 --output-format=github \
+            src/ visualizations.py
+
+      - name: Install runtime dependencies
+        # numpy, pandas and plotly are imported by src/calculations.py and
+        # visualizations.py but absent from requirements.txt, which pins
+        # streamlit only. Found by running this import check locally, which
+        # failed on the missing plotly before the workflow was written.
+        run: python -m pip install "streamlit==1.35.0" numpy pandas plotly
+
+      - name: Import check
+        # Verifies the application modules actually load, not just parse. src/
+        # must be on the path because app.py imports its siblings by bare name.
+        env:
+          PYTHONPATH: src
+        run: |
+          python -c "import calculations, visualizations; print('src modules import cleanly')"
