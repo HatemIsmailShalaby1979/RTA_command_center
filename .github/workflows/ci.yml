@@ -66,11 +66,9 @@ jobs:
             src/ visualizations.py
 
       - name: Install runtime dependencies
-        # numpy, pandas and plotly are imported by src/calculations.py and
-        # visualizations.py but absent from requirements.txt, which pins
-        # streamlit only. Found by running this import check locally, which
-        # failed on the missing plotly before the workflow was written.
-        run: python -m pip install "streamlit==1.35.0" numpy pandas plotly
+        # Installs from requirements.txt, which now declares everything the
+        # shipped code imports. The step below proves it independently.
+        run: python -m pip install -r requirements.txt
 
       - name: Import check
         # Verifies the application modules actually load, not just parse. src/
@@ -79,3 +77,11 @@ jobs:
           PYTHONPATH: src
         run: |
           python -c "import calculations, visualizations; print('src modules import cleanly')"
+
+      - name: Verify requirements.txt is complete
+        # Builds a second, clean virtualenv from requirements.txt alone and
+        # imports the application from it. This is the gate that would have
+        # caught the original defect: requirements.txt declared only streamlit
+        # while the code imported numpy, pandas and plotly, so a clean install
+        # could not start the application at all.
+        run: python tooling/verify_requirements.py

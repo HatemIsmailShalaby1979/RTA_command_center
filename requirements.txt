@@ -1,2 +1,29 @@
-# streamlit drives the dashboard UI.
+# Runtime dependencies for the RTA command centre.
+#
+# Pinned, not floored. Every version below was resolved and then verified: a
+# clean virtualenv installing exactly this file imports the application modules
+# without error. See tooling/verify_requirements.py.
+#
+# Why these versions and not the newest on PyPI
+# ---------------------------------------------
+# streamlit 1.35.0 constrains two of them, and the constraint is not obvious:
+#
+#   streamlit 1.35.0 requires numpy >=1.19.3,<2   -> numpy 2.x will not resolve
+#   streamlit 1.35.0 requires pandas >=1.3.0,<3    -> pandas 3.x will not resolve
+#
+# Installing numpy==2.5.3 or pandas==3.0.6 here fails with
+# ResolutionImpossible. The current releases are 2.5.3 and 3.0.6, so pinning
+# "the latest" produces a requirements file that cannot be installed at all.
+# The versions here are the newest that satisfy streamlit 1.35.0.
+
+# The dashboard UI. Pins numpy<2 and pandas<3.
 streamlit==1.35.0
+
+# Imported by src/calculations.py
+numpy==1.26.4
+
+# Imported by src/app.py, src/calculations.py and visualizations.py
+pandas==2.3.3
+
+# Imported by visualizations.py (px, go, make_subplots)
+plotly==7.1.0
